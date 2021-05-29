@@ -8,7 +8,7 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            countryCode: "+91",
+            countryCode: "91",
             mobileNumber: "",
             messageText: "",
             modalVisible: false,
@@ -25,21 +25,22 @@ export default class App extends Component {
     openWhatsApp = () => {
         let msg = this.state.messageText;
         let mobno = this.state.mobileNumber;
+        let concode = this.state.countryCode;
 
         if (mobno) {
-            if (msg) {
-                let url = "whatsapp://send?text=" + msg + "&phone=" + mobno;
-                console.log(url);
-                Linking.openURL(url)
-                    .then(data => {
-                        console.log("WhatsApp Opened Successfully " + data);
-                    })
-                    .catch(() => {
-                        alert("WhatsApp is not installed on your device");
-                    });
-            } else {
-                alert("Please enter some Message Text to send");
-            }
+            // if (msg) {
+            let url = "whatsapp://send?text=" + msg + "&phone=" + concode + mobno;
+            console.log(url);
+            Linking.openURL(url)
+                .then(data => {
+                    console.log("WhatsApp Opened Successfully " + data);
+                })
+                .catch(() => {
+                    alert("WhatsApp is not installed on your device");
+                });
+            // } else {
+            //     alert("Please enter some Message Text to send");
+            // }
         } else {
             alert("Please enter a Mobile Number to send");
         }
@@ -83,7 +84,7 @@ export default class App extends Component {
                         <TextInput
                             editable={false}
                             selectTextOnFocus={false}
-                            value={this.state.countryCode}
+                            value={`+${this.state.countryCode}`}
                             style={[localStyles.input, {
                                 flex: 0.2, marginRight: 5, textAlign: 'center', color: ColorTheme.grey,
                                 backgroundColor: this.state.isDarkModeEnabled ? ColorTheme.disabledInputDark : ColorTheme.disabledInputLight
@@ -96,21 +97,27 @@ export default class App extends Component {
                             placeholder={"Enter Mobile Number here"}
                             placeholderTextColor={ColorTheme.grey}
                             keyboardType={"numeric"}
-                            style={[localStyles.input, { flex: 0.8, marginLeft: 5 }]}
+                            style={[localStyles.input, {
+                                flex: 0.8, marginLeft: 5,
+                                color: this.state.isDarkModeEnabled ? ColorTheme.white : ColorTheme.black
+                            }]}
                         />
                     </View>
 
                     <TextInput
                         value={this.state.messageText}
                         onChangeText={(text) => this.handleMsg(text)}
-                        placeholder={"Enter your Message here"}
+                        placeholder={"Enter your Message here (Optional)"}
                         placeholderTextColor={ColorTheme.grey}
                         multiline={true}
-                        style={[localStyles.input, { height: 100, width: 300 }]}
+                        style={[localStyles.input, {
+                            height: 100, width: 300,
+                            color: this.state.isDarkModeEnabled ? ColorTheme.white : ColorTheme.black
+                        }]}
                     />
 
                     <TouchableOpacity style={localStyles.button} onPress={this.openWhatsApp}>
-                        <Text style={{ color: ColorTheme.white, fontSize: 15 }}>Send</Text>
+                        <Text style={{ color: ColorTheme.white, fontSize: 15 }}>Open Chat</Text>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity activeOpacity={0.7} style={localStyles.footer} onPress={() => this.setState({ modalVisible: true })} >
