@@ -13,8 +13,6 @@ Ever been in a situation when you need to send a stranger - a store owner, cab d
  - Strictly speaking from a privacy perspective, we should never save numbers of strangers because a lot of applications sync our contacts details, i.e., assume everyone in your contact list is a friend and may end up sharing details with them, which you might not be willing to share.
 
  - Also, a lot of times, we end up forgetting to delete their numbers and try to figure out later who this person was and what was the purpose of storing their numbers. Hence not deleting the contact, thinking it might be uselful.
-
- - Also, the app is only kb in size, so you don't need to worry about the space issue, which apparently we all have even after buying the model with the max storage (Only god knows where all the free space goes!)
  
 ## Using the App
 
