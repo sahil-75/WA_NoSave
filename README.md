@@ -18,6 +18,6 @@ Ever been in a situation when you need to send a stranger - a store owner, cab d
  
 ## Using the App
 
- - Download the APK from [this link](../blob/master/WA_NoSave.apk)
+ - Download the APK from [this link](../master/WA_NoSave.apk)
  - Install the App
  - Send Random people texts on WhatsApp without saving their numbers
