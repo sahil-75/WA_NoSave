@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, Image } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 export default class App extends Component {
     constructor(props) {
@@ -17,7 +16,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF", justifyContent: 'center' }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: "#292929", justifyContent: 'center' }}>
                 <View style={localStyles.logoBox}>
                     <Image source={require('../../assets/Logo.png')} resizeMode='contain' style={localStyles.logo} />
                     <Text style={localStyles.logoText}>WA_NoSave</Text>
@@ -43,7 +42,7 @@ const localStyles = StyleSheet.create({
         alignItems: 'center'
     },
     footerText: {
-        color: "#000",
+        color: "#FFF",
         fontSize: 15,
     },
     logoBox: {
@@ -52,11 +51,13 @@ const localStyles = StyleSheet.create({
         marginBottom: 50
     },
     logo: {
-        width: '30%',
+        width: '40%',
         height: '40%',
-        marginBottom: 10
+        marginBottom: 15
     },
     logoText: {
+        color: "#FFF",
+        fontSize: 25,
         fontWeight: '500'
     }
 });
