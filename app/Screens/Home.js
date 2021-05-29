@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Linking, SafeAreaView, Switch, Image, Dimensions } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Linking, SafeAreaView, Switch, Image, Dimensions, BackHandler, Alert } from 'react-native';
 import { ColorTheme, countryCodes } from '../utils/constants';
 
 const { height, width } = Dimensions.get('window');
@@ -14,6 +14,30 @@ export default class App extends Component {
             modalVisible: false,
             isDarkModeEnabled: false
         };
+    }
+
+    componentDidMount() {
+        BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+
+    handleBackButton() {
+        Alert.alert(
+            'Exit App',
+            'Do you want to close the app?', [{
+                text: 'No',
+                onPress: () => { console.log('No pressed') },
+                style: 'cancel'
+            }, {
+                text: 'Yes',
+                onPress: () => { BackHandler.exitApp(); return true },
+                style: 'default'
+            }], { cancelable: false }
+        );
+        return true;
     }
 
     toggleTheme = () => {
