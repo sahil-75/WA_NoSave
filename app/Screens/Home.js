@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, Linking, SafeAreaView, Switch, Image, Dimensions, TouchableHighlight } from 'react-native';
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, Linking, SafeAreaView, Switch, Image, Dimensions } from 'react-native';
+import { ColorTheme, countryCodes } from '../utils/constants';
+
 const { height, width } = Dimensions.get('window');
 
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            countryCode: "+91",
             mobileNumber: "",
             messageText: "",
             modalVisible: false,
@@ -56,15 +59,14 @@ export default class App extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: this.state.isDarkModeEnabled ? "#292929" : "#fafcf8" }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: this.state.isDarkModeEnabled ? ColorTheme.black : ColorTheme.white }}>
                 <View style={localStyles.header}>
                     <Text style={localStyles.headerText}>WA_NoSave</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#0101014d', borderRadius: 10, padding: 5 }}>
+                    <View style={localStyles.switchBox}>
                         <Text>&#x2600;</Text>
                         <Switch
-                            trackColor={{ false: "#767577", true: "#81b0ff" }}
-                            thumbColor={"#f4f3f4"}
-                            ios_backgroundColor="#3e3e3e"
+                            trackColor={{ false: ColorTheme.offTrack, true: ColorTheme.onTrack }}
+                            thumbColor={ColorTheme.thumbColor}
                             onValueChange={this.toggleTheme}
                             value={this.state.isDarkModeEnabled}
                             style={{ marginLeft: 5 }}
@@ -73,30 +75,42 @@ export default class App extends Component {
                     </View>
                 </View>
                 <View style={localStyles.container}>
-                    <Text style={{ textAlign: "justify", fontSize: 15, marginBottom: 15, color: this.state.isDarkModeEnabled ? "#FFF" : "#444" }}>
+                    <Text style={[localStyles.instructions, { color: this.state.isDarkModeEnabled ? ColorTheme.white : ColorTheme.black }]}>
                         Type your message here and send it to anyone on WhatsApp without having to save their numbers.
                     </Text>
 
-                    <TextInput
-                        value={this.state.mobileNumber}
-                        onChangeText={(text) => this.handleMobNo(text)}
-                        placeholder={"Enter Mobile Number here"}
-                        placeholderTextColor={this.state.isDarkModeEnabled ? "#FFF" : "#777"}
-                        keyboardType={"numeric"}
-                        style={[localStyles.input, { borderColor: this.state.isDarkModeEnabled ? "#FFF" : "#000", }]}
-                    />
+                    <View style={[localStyles.inputGroup, { flexDirection: 'row' }]}>
+                        <TextInput
+                            editable={false}
+                            selectTextOnFocus={false}
+                            value={this.state.countryCode}
+                            style={[localStyles.input, {
+                                flex: 0.2, marginRight: 5, textAlign: 'center', color: ColorTheme.grey,
+                                backgroundColor: this.state.isDarkModeEnabled ? ColorTheme.disabledInputDark : ColorTheme.disabledInputLight
+                            }]}
+                        />
+
+                        <TextInput
+                            value={this.state.mobileNumber}
+                            onChangeText={(text) => this.handleMobNo(text)}
+                            placeholder={"Enter Mobile Number here"}
+                            placeholderTextColor={ColorTheme.grey}
+                            keyboardType={"numeric"}
+                            style={[localStyles.input, { flex: 0.8, marginLeft: 5 }]}
+                        />
+                    </View>
 
                     <TextInput
                         value={this.state.messageText}
                         onChangeText={(text) => this.handleMsg(text)}
                         placeholder={"Enter your Message here"}
-                        placeholderTextColor={this.state.isDarkModeEnabled ? "#FFF" : "#777"}
+                        placeholderTextColor={ColorTheme.grey}
                         multiline={true}
-                        style={[localStyles.input, { height: 90, borderColor: this.state.isDarkModeEnabled ? "#FFF" : "#000", }]}
+                        style={[localStyles.input, { height: 100, width: 300 }]}
                     />
 
                     <TouchableOpacity style={localStyles.button} onPress={this.openWhatsApp}>
-                        <Text style={{ color: "#FFF", fontSize: 15 }}>Send!</Text>
+                        <Text style={{ color: ColorTheme.white, fontSize: 15 }}>Send</Text>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity activeOpacity={0.7} style={localStyles.footer} onPress={() => this.setState({ modalVisible: true })} >
@@ -137,7 +151,7 @@ const localStyles = StyleSheet.create({
         padding: 30,
     },
     header: {
-        backgroundColor: "#128C7E",
+        backgroundColor: ColorTheme.primary,
         paddingVertical: 15,
         paddingHorizontal: 20,
         flexDirection: 'row',
@@ -148,38 +162,53 @@ const localStyles = StyleSheet.create({
         height: '100%',
     },
     headerText: {
-        color: "#FFF",
+        color: ColorTheme.white,
         fontSize: 25
+    },
+    switchBox: {
+        padding: 5,
+        borderRadius: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: ColorTheme.switchBox,
+    },
+    instructions: {
+        textAlign: "justify",
+        fontSize: 15,
     },
     footer: {
         flexDirection: 'row',
         position: 'absolute',
         bottom: 0,
         width: '100%',
-        backgroundColor: "#128C7E",
+        backgroundColor: ColorTheme.primary,
         paddingVertical: 12,
         alignItems: 'center',
         justifyContent: 'center'
     },
     footerText: {
-        color: "#FFF",
+        color: ColorTheme.white,
         fontSize: 17,
     },
+    inputGroup: {
+        marginVertical: 30,
+        height: 45,
+        width: 300
+    },
     input: {
-        width: 300,
         height: 45,
         padding: 10,
-        margin: 10,
+        marginVertical: 10,
         borderRadius: 5,
-        borderWidth: 0.5
+        borderWidth: 0.5,
+        borderColor: ColorTheme.grey
     },
     button: {
-        backgroundColor: "#128C7E",
+        backgroundColor: ColorTheme.primary,
         paddingHorizontal: 15,
         paddingVertical: 7,
         marginTop: 20,
         borderRadius: 5,
-        borderWidth: 0.5
     },
     modalBg: {
         top: 0,
@@ -189,7 +218,7 @@ const localStyles = StyleSheet.create({
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#121212D9'
+        backgroundColor: ColorTheme.modalBg
     },
     modal: {
         width: 300,
@@ -197,7 +226,7 @@ const localStyles = StyleSheet.create({
         paddingVertical: 15,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#292929'
+        backgroundColor: ColorTheme.black
     },
     appLogo: {
         width: '30%',
@@ -206,12 +235,12 @@ const localStyles = StyleSheet.create({
     },
     modalText: {
         fontSize: 15,
-        color: '#FFF',
+        color: ColorTheme.white,
         marginBottom: 5
     },
     modalTextLinks: {
         fontSize: 15,
-        color: '#539bf5',
+        color: ColorTheme.blue,
         fontWeight: 'bold'
     }
 });

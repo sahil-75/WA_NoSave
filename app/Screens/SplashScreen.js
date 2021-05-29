@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, Image } from 'react-native';
+import { ColorTheme } from '../utils/constants';
 
 export default class App extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class App extends Component {
 
     render() {
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: "#292929", justifyContent: 'center' }}>
+            <SafeAreaView style={{ flex: 1, backgroundColor: ColorTheme.black, justifyContent: 'center' }}>
                 <View style={localStyles.logoBox}>
                     <Image source={require('../../assets/Logo.png')} resizeMode='contain' style={localStyles.logo} />
                     <Text style={localStyles.logoText}>WA_NoSave</Text>
@@ -42,7 +43,7 @@ const localStyles = StyleSheet.create({
         alignItems: 'center'
     },
     footerText: {
-        color: "#FFF",
+        color: ColorTheme.white,
         fontSize: 15,
     },
     logoBox: {
@@ -56,7 +57,7 @@ const localStyles = StyleSheet.create({
         marginBottom: 15
     },
     logoText: {
-        color: "#FFF",
+        color: ColorTheme.white,
         fontSize: 25,
         fontWeight: '500'
     }
