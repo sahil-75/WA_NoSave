@@ -10,14 +10,16 @@ export default class App extends Component {
     }
 
     componentDidMount() {
-        setTimeout(() => Actions.Home(), 2000);
+        setTimeout(() => {
+            this.props.navigation.push('Home');
+        }, 2000);
     }
 
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: "#FFF", justifyContent: 'center' }}>
                 <View style={localStyles.logoBox}>
-                    <Image source={require('../assets/Logo.png')} resizeMode='contain' style={localStyles.logo} />
+                    <Image source={require('../../assets/Logo.png')} resizeMode='contain' style={localStyles.logo} />
                     <Text style={localStyles.logoText}>WA_NoSave</Text>
                 </View>
                 <View style={localStyles.footer}>
