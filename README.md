@@ -15,3 +15,9 @@ Ever been in a situation when you need to send a stranger - a store owner, cab d
  - Also, a lot of times, we end up forgetting to delete their numbers and try to figure out later who this person was and what was the purpose of storing their numbers. Hence not deleting the contact, thinking it might be uselful.
 
  - Also, the app is only kb in size, so you don't need to worry about the space issue, which apparently we all have even after buying the model with the max storage (Only god knows where all the free space goes!)
+ 
+## Using the App
+
+ - Download the APK from [this link](../blob/master/WA_NoSave.apk)
+ - Install the App
+ - Send Random people texts on WhatsApp without saving their numbers
